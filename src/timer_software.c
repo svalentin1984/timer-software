@@ -21,8 +21,6 @@
 
 #include <stdint.h>
 #include "timer_software.h"
-//#include <SystemConfig.h>
-//#include <CommunicationApp/led.h>
 //*****************************************************************************
 /*! \var SOFTWARE_TIMER timers[MAX_NR_TIMERS];
 	\brief The software timers structures. 
