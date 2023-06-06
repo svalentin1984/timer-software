@@ -81,7 +81,7 @@ void main(void)
     TIMER_SOFTWARE_configure_timer(handler, MODE_1, 1000, true);
     // set a callback for the requested timer
     TIMER_SOFTWARE_set_callback(handler, mycallback);
-    TIMER_SOFTWARE_start_timer(handler);
+    TIMER_SOFTWARE_start_timer(handler);        // start the timer
     while(1)
     {
         // some code
@@ -89,6 +89,51 @@ void main(void)
     // some code
 }
 ```
+
+In the previous example we can use the software timer to generate an event with a period
+of 1000 ms.
+After the initializations, we declare a handler for the software timer we want to use and then, we request the timer. If the system could not offer a software timer (mainly because there are not software timers available) the value of the handler is negative. On the successful request of a system timer, we configure the timer to work in **MODE_1** with a period of 1000 ms. The next step is to instantiate a callback and finally we can start the timer. Our callback function (mycallback) will be executed, once every 1000 ms
+
+Example using polling method
+----------------------------
+There is also another way the programmer may use the software timer: without using
+a callback system thus using a polling method. Such a method is described in the following
+example which is similar to the previous one. This program also executes an event every 1000 ms but without using callbacks, but by using an event polling method instead.
+
+```C
+#include "timer_software.h"
+
+void main(void)
+{
+    // some code
+    TIMER_SOFTWARE_init();
+    // some code
+    timer_software_handler_t handler;           // declare a sotware timer
+    handler = TIMER_SOFTWARE_request_timer();   // request a software timer
+    if (handler < 0)                            // check if the request was successful
+    {
+        // error
+        // the system could not offer a software timer
+    }
+    //configure the software timer to run in MODE_1 (reset and restart on match) with a period of 1 second (1000 ms)
+    TIMER_SOFTWARE_configure_timer(handler, MODE_1, 1000, true);
+    // start the timer
+    TIMER_SOFTWARE_start_timer(handler);
+    while(1)
+    {
+        // user code
+        if (TIMER_SOFTWARE_interrupt_pending(handler) != 0)
+        {
+            // code to be executed on event
+            TIMER_SOFTWARE_clear_interrupt(handler);
+        }
+        // user code
+    }
+    // some code
+}
+```
+The difference between this example and the previous one is that in the latter we do
+not use a callback. Inside the forever loop of the program we check if an event (named as interrupt) has occurred. If so, we execute the code we need and clear the interrupt flag. 
 
 Examples
 ========
