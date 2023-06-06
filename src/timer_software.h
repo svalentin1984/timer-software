@@ -83,7 +83,7 @@ typedef struct
 
 //extern volatile SOFTWARE_TIMER timers[];
 
-void TIMER_SOFTWARE_ModX(void);
+void TIMER_SOFTWARE_Task(void);
 void TIMER_SOFTWARE_init(void);
 uint8_t TIMER_SOFTWARE_release_timer(timer_software_handler_t timer_handler);
 timer_software_handler_t TIMER_SOFTWARE_request_timer(void);

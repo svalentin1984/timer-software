@@ -23,7 +23,7 @@ void *timer_software_task_thread(void *arg)
 {
   while (running)
     {
-      TIMER_SOFTWARE_ModX();
+      TIMER_SOFTWARE_Task();
       usleep(1000);
     }
   return NULL;

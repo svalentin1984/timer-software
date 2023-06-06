@@ -17,7 +17,7 @@ unsigned int n = 0;
 
 ISR(TIMER1_COMPA_vect)
 {
-	TIMER_SOFTWARE_ModX();
+	TIMER_SOFTWARE_Task();
 }
 
 void TIMER_Init()

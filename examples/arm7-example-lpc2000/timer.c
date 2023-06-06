@@ -5,7 +5,7 @@
 
 void TIMER_IRQ() __irq
 {
-	TIMER_SOFTWARE_ModX();
+	TIMER_SOFTWARE_Task();
 	T1IR = 1;
 }
 

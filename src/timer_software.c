@@ -80,7 +80,7 @@ timer_software_handler_t wait_timer;
 //! \private
 //*****************************************************************************
 
-void TIMER_SOFTWARE_ModX()
+void TIMER_SOFTWARE_Task()
 {
 	uint8_t i;
 	for (i = 0; i < MAX_NR_TIMERS; i++)
