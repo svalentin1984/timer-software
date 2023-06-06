@@ -140,23 +140,23 @@ Examples
 
 Several examples are given in the /examples directory of this repo. 
 
-Example 1
+Example 1 - ARM7
 ---------
 
-In the examples\arm7-example-lp2000 directory, we provide a complete working example implemented as a Keil uVision project for an ARM7TDMI-S based architecture: the NXP LPC2294. We run the task function inside of a FIQ interrupt routing (executed every 1 ms). The processor is clocked using a 14.7456 MHz quartz. We use 2 timers, one with a callback and one using the polling method for blinking two different leds on separate port lines.
+In the examples/arm7-example-lp2000 directory, we provide a complete working example implemented as a Keil uVision project for an ARM7TDMI-S based architecture: the NXP LPC2294. We run the task function inside of a FIQ interrupt routing (executed every 1 ms). The processor is clocked using a 14.7456 MHz quartz. We use 2 timers, one with a callback and one using the polling method for blinking two different leds on separate port lines.
 
 The code was tested on Olimex LPC-H2294 board.
 
 
-Example 2
+Example 2 - AVR
 ---------
 
-In the examples\avr-example-atmega16 directory, we provide a complete working example implemented as a Microchip Studio project for an AVR ATMEGA16 microcontroller. We run the task function inside of timer1 match ISR (executed every 1 ms). The processor is clocked using a 14.7456 MHz quartz. We use 2 timers, one with a callback and one using the polling method for blinking two different leds on separate port lines.
+In the examples/avr-example-atmega16 directory, we provide a complete working example implemented as a Microchip Studio project for an AVR ATMEGA16 microcontroller. We run the task function inside of timer1 match ISR (executed every 1 ms). The processor is clocked using a 14.7456 MHz quartz. We use 2 timers, one with a callback and one using the polling method for blinking two different leds on separate port lines.
 
 
-Example 3
+Example 3 - LINUX
 ---------
 
-In the examples\linux-example we provide a simple POSIX example in C. The task function is executed by a thread routine. The timing of 1 ms is done by using a call to usleep(). We advise that this is not the best solution but is enough for demonstrative purposes.
+In the examples/linux-example we provide a simple POSIX example in C. The task function is executed by a thread routine. The timing of 1 ms is done by using a call to usleep(). We advise that this is not the best solution but is enough for demonstrative purposes.
 
 We use 2 timers, one with a callback and one using the polling method. For each timer we print a different message to stdout. The program is terminated when the SIGINT signal is received (CTRL+C).
