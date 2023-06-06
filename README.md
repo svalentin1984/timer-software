@@ -12,16 +12,46 @@ TIMER SOFTWARE Usage Description
 
 This software timer implementation needs a base timing which may be insured either by a hardware timer or by a thread/task/process implementation of an operating system. The software timer requires that its main task function is called with a strict period of 1 ms. The timer software's main task function is represented by the following function:
 
-`void TIMER_SOFTWARE_Task()`
+```C
+void TIMER_SOFTWARE_Task();
+```
 
-This function must be called periodically each millisecond. Before calling this function, the user must first initialize the library by calling 
+This function must be called periodically each millisecond. 
+
+Before calling the above function, the user must first initialize the library by calling:
 
 ```C
-void TIMER_SOFTWARE_Init()
+void TIMER_SOFTWARE_Init();
 ```
+
+The initialization function above must be called only once, prior to any other calls from this library. 
+
+There are no special options for compiling this library. Before compilation the use may adjust the maximum number of supported timers be changing the *MAX_NR_TIMERS* macro in *timer_software.h* file.
+
+In order to use a time, the programmer must define a variable of type *timer_software_handler_t* which will hold a unique identifier of the timer. The programmer must assign this variable with the value returned by the function *TIMER_SOFTWARE_request_timer*. In other word, before using a timer, it must be requested to the library. After the request, the returned handler will uniquely identify the timer within the library.
+
+After a timer has been requested, the user must configure the timer by calling *TIMER_SOFTWARE_configure_timer*. The user must specify the timer through the handler along with the period, operating mode and a flag that should enable the timer. 
+
+The programmer may then use the timer through the functions provided by the library according to the doxygen documentation.
+
+Each timer has 4 operating modes:
+
+  * **MODE_0** - The software timer counts to the value given by period. When the counter is equal to the value of the period, the timer stops and generates an event.
+  * **MODE_1** - The software timer counts to the value given by period. When the counter is equal to the value of the period, the timer generates an event, resets the counter and restarts
+  * **MODE_2** - The software timer counts to the value given by period. When the counter is equal to the value of the peiod, the timer generates an event and continues running
+  * **MODE_3** - This operating mode is free run mode. THe counter just starts from 0 and keeps counting without generating any evenys.
+
+The programmer may use this timer with event generation via a callback system or
+using polling methods via dedicated methods for checking pending events. Before using a timer, the programmers needs to acquire such a timer by calling TIMER_SOFTWARE_request_timer which returns a descriptor for the newly allocated timer. A timer may be released after the programmer finishes using it, by calling TIMER_SOFTWARE_release_timer. After a timer has been acquired by the programmer it has to be configured by specifying its operating mode and its counting period.
+
+The library also offers a simple wait function which blocks the code execution for an
+amount of time given as argument.
+
+Several examples are given in the /examples directory of this repo
 
 Examples
 ========
+
 
 
 Example 1
