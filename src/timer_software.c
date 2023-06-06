@@ -155,7 +155,7 @@ void TIMER_SOFTWARE_ModX()
 
 
 //*****************************************************************************
-//! Initializes the software timer structure. This function is called by \ref TIMER_SOFTWARE_init_system
+//! Initializes the software timer structure. This function is called by \ref TIMER_SOFTWARE_init
 //! 
 //! \private
 //*****************************************************************************
