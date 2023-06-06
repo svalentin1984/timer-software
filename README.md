@@ -45,13 +45,55 @@ The programmer may use this timer with event generation via a callback system or
 using polling methods via dedicated methods for checking pending events. Before using a timer, the programmers needs to acquire such a timer by calling TIMER_SOFTWARE_request_timer which returns a descriptor for the newly allocated timer. A timer may be released after the programmer finishes using it, by calling TIMER_SOFTWARE_release_timer. After a timer has been acquired by the programmer it has to be configured by specifying its operating mode and its counting period.
 
 The library also offers a simple wait function which blocks the code execution for an
-amount of time given as argument.
+amount of time given as argument. It may be used for delay generation.
 
-Several examples are given in the /examples directory of this repo
+Generic Examples
+================
+
+In this sections we will present 2 usages examples: one for using a timer in a polling method and one using callbacks. In both cases, we only show the actual usage of the library. We presume that the rest of the preparations are made (the task function is called with a period of 1 ms)
+
+Example using callbacks
+-----------------------
+
+This example describes a simple usage of a software timer with event generation via callbacks:
+
+```C
+#include "timer_software.h"
+
+void mycallback(timer_software_handler_t handler)
+{
+    // code to be executed on event
+}
+
+void main(void)
+{
+    // some code
+    TIMER_SOFTWARE_init();
+    // some code
+    timer_software_handler_t handler;           // declare a sotware timer
+    handler = TIMER_SOFTWARE_request_timer();   // request a software timer
+    if (handler < 0)                            // check if the request was successful
+    {
+        // error
+        // the system could not offer a software timer
+    }
+    //configure the software timer to run in MODE_1 (reset and restart on match) with a period of 1 second (1000 ms)
+    TIMER_SOFTWARE_configure_timer(handler, MODE_1, 1000, true);
+    // set a callback for the requested timer
+    TIMER_SOFTWARE_set_callback(handler, mycallback);
+    TIMER_SOFTWARE_start_timer(handler);
+    while(1)
+    {
+        // some code
+    }
+    // some code
+}
+```
 
 Examples
 ========
 
+Several examples are given in the /examples directory of this repo. 
 
 
 Example 1
