@@ -22,7 +22,7 @@ extern "C"
 #endif
 
 #define SW_TIMER_PERIOD 	1000 // (us)  /**< Defines the software timer tick in microseconds  */
-#define MAX_NR_TIMERS 		10					  /**< Maximum available timers  */
+#define MAX_NR_TIMERS 		100					  /**< Maximum available timers  */
 
 //*****************************************************************************
 //! \enum SOFTWARE_TIMER_MODE
@@ -83,7 +83,7 @@ typedef struct
 
 //extern volatile SOFTWARE_TIMER timers[];
 
-void TIMER_SOFTWARE_ModX(void);
+void TIMER_SOFTWARE_Task(void);
 void TIMER_SOFTWARE_init(void);
 uint8_t TIMER_SOFTWARE_release_timer(timer_software_handler_t timer_handler);
 timer_software_handler_t TIMER_SOFTWARE_request_timer(void);
