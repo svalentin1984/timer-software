@@ -26,14 +26,14 @@
 	\brief The software timers structures. 
 */
 //*****************************************************************************
-volatile SOFTWARE_TIMER timers[MAX_NR_TIMERS];
+static volatile SOFTWARE_TIMER timers[MAX_NR_TIMERS];
 
 //*****************************************************************************
 /*! \var timer_software_handler_t wait_timer
 	\brief Defines a software timer needed for a the function. 
 */
 //*****************************************************************************
-timer_software_handler_t wait_timer;
+static timer_software_handler_t wait_timer;
 
 #define VALIDATE_TIMER(timer_id) 				(timers[timer_id].TimerControl |= 1)
 #define INVALIDATE_TIMER(timer_id)				(timers[timer_id].TimerControl &= ~1)
