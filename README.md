@@ -28,7 +28,7 @@ The initialization function above must be called only once, prior to any other c
 
 There are no special options for compiling this library. Before compilation the use may adjust the maximum number of supported timers be changing the *MAX_NR_TIMERS* macro in *timer_software.h* file.
 
-In order to use a time, the programmer must define a variable of type *timer_software_handler_t* which will hold a unique identifier of the timer. The programmer must assign this variable with the value returned by the function *TIMER_SOFTWARE_request_timer*. In other word, before using a timer, it must be requested to the library. After the request, the returned handler will uniquely identify the timer within the library.
+In order to use a time, the programmer must define a variable of type *timer_software_handler_t* which will hold a unique identifier of the timer. The programmer must assign this variable with the value returned by the function *TIMER_SOFTWARE_request_timer*. In other words, before using a timer, it must be requested to the library. After the request, the returned handler will uniquely identify the timer within the library.
 
 After a timer has been requested, the user must configure the timer by calling *TIMER_SOFTWARE_configure_timer*. The user must specify the timer through the handler along with the period, operating mode and a flag that should enable the timer. 
 
@@ -37,12 +37,12 @@ The programmer may then use the timer through the functions provided by the libr
 Each timer has 4 operating modes:
 
   * **MODE_0** - The software timer counts to the value given by period. When the counter is equal to the value of the period, the timer stops and generates an event.
-  * **MODE_1** - The software timer counts to the value given by period. When the counter is equal to the value of the period, the timer generates an event, resets the counter and restarts
+  * **MODE_1** - The software timer counts to the value given by period. When the counter is equal to the value of the period, the timer generates an event, resets the counter and restart
   * **MODE_2** - The software timer counts to the value given by period. When the counter is equal to the value of the peiod, the timer generates an event and continues running
-  * **MODE_3** - This operating mode is free run mode. THe counter just starts from 0 and keeps counting without generating any evenys.
+  * **MODE_3** - This operating mode is free run mode. THe counter just starts from 0 and keeps counting without generating any events.
 
-The programmer may use this timer with event generation via a callback system or
-using polling methods via dedicated methods for checking pending events. Before using a timer, the programmers needs to acquire such a timer by calling TIMER_SOFTWARE_request_timer which returns a descriptor for the newly allocated timer. A timer may be released after the programmer finishes using it, by calling TIMER_SOFTWARE_release_timer. After a timer has been acquired by the programmer it has to be configured by specifying its operating mode and its counting period.
+The programmer may use a timer with event generation via a callback system or
+using polling methods via dedicated methods for checking pending events. Before using a timer, the programmers needs to acquire such a timer by calling *TIMER_SOFTWARE_request_timer* which returns a descriptor for the newly allocated timer. A timer may be released after the programmer finishes using it, by calling *TIMER_SOFTWARE_release_timer*. After a timer has been acquired by the programmer it has to be configured by specifying its operating mode and its counting period using *TIMER_SOFTWARE_configure_timer*.
 
 The library also offers a simple wait function which blocks the code execution for an
 amount of time given as argument. It may be used for delay generation.
@@ -50,7 +50,7 @@ amount of time given as argument. It may be used for delay generation.
 Generic Examples
 ================
 
-In this sections we will present 2 usages examples: one for using a timer in a polling method and one using callbacks. In both cases, we only show the actual usage of the library. We presume that the rest of the preparations are made (the task function is called with a period of 1 ms)
+In this sections we will present 2 usage examples: one for using a timer in a polling method and one using callbacks. In both cases, we only show the actual usage of the library. We presume that the rest of the preparations are made (the task function is called with a period of 1 ms)
 
 Example using callbacks
 -----------------------
